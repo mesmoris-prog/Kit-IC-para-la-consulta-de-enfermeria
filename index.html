@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit IC Enfermería · AGEFEC</title>
+<meta name="description" content="Kit de consulta de enfermería sobre insuficiencia cardiaca: checklist, medicación, autocuidado, clasificación, descompensación y cruces con EPOC y ERC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;0,800;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f7fb; --bg-2:#eaf0f7; --surface:#ffffff; --ink:#122338; --ink-2:#33475f; --muted:#5a6b80; --line:#d9e2ec;
+  --accent:#1a5c9c; --accent-ink:#0f4478; --accent-soft:#e3edf8; --navy:#002c84;
+  --green:#1c7a4f; --green-soft:#e1f2e8; --amber:#a86300; --amber-soft:#fbefd9; --red:#b3392d; --red-soft:#fbe6e2;
+  --shadow-1:0 1px 2px rgba(18,35,56,.06),0 4px 14px rgba(18,35,56,.06);
+  --shadow-2:0 2px 4px rgba(18,35,56,.06),0 14px 34px rgba(18,35,56,.10);
+  --r-s:10px; --r-m:16px; --r-l:24px;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"Atkinson Hyperlegible Next","Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --font-mono:"Atkinson Hyperlegible Mono",ui-monospace,Menlo,Consolas,monospace;
+  --fs-base:1.0625rem; --topbar-h:58px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#0c1624; --bg-2:#111e30; --surface:#15243a; --ink:#e8eef6; --ink-2:#c3d0df; --muted:#9aaec4; --line:#26384f;
+  --accent:#7ab0e8; --accent-ink:#a9cdf2; --accent-soft:#16304d; --navy:#7ab0e8;
+  --green:#62c894; --green-soft:#143a2a; --amber:#eaa94c; --amber-soft:#3a2a10; --red:#f08377; --red-soft:#3d1c19;
+  --shadow-1:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); --shadow-2:0 2px 4px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0c1624; --bg-2:#111e30; --surface:#15243a; --ink:#e8eef6; --ink-2:#c3d0df; --muted:#9aaec4; --line:#26384f;
+  --accent:#7ab0e8; --accent-ink:#a9cdf2; --accent-soft:#16304d; --navy:#7ab0e8;
+  --green:#62c894; --green-soft:#143a2a; --amber:#eaa94c; --amber-soft:#3a2a10; --red:#f08377; --red-soft:#3d1c19;
+  --shadow-1:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); --shadow-2:0 2px 4px rgba(0,0,0,.3),0 14px 34px rgba(0,0,0,.35)}
+:root.big-text{--fs-base:1.25rem}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--topbar-h) + 78px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:var(--fs-base);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.12;margin:0;text-wrap:balance;color:var(--ink)}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.skip-link{position:absolute;left:16px;top:-60px;z-index:100;background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:8px;text-decoration:none}
+.skip-link:focus{top:12px}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1120px;margin:auto;padding-inline:16px;height:var(--topbar-h);display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:700;white-space:nowrap}
+.brand svg{width:30px;height:30px;flex:none}
+.brand b{color:var(--accent)}
+.brand .agefec{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);margin-left:6px;letter-spacing:.08em}
+.topbar-spacer{flex:1}
+.tool-btn{display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:.42rem .7rem;font-size:.9rem;font-weight:700}
+.tool-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+@media (max-width:430px){.brand span{display:none}.brand .agefec{display:none}}
+.tabsbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--topbar-h));z-index:45;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs-inner{max-width:1120px;margin:auto;padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.tabs-inner a{flex:none;display:inline-flex;align-items:center;gap:8px;text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.45rem .95rem;font-weight:700;font-size:.92rem;color:var(--ink-2);white-space:nowrap}
+.tabs-inner a .n{font-family:var(--font-mono);font-size:.68rem;background:var(--accent-soft);color:var(--accent-ink);border-radius:999px;padding:2px 7px}
+.tabs-inner a[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs-inner a[aria-selected="true"] .n{background:var(--accent);color:#fff}
+.shell{max-width:1120px;margin:auto;padding-inline:16px}
+[data-sec]{display:none}
+[data-sec].on{display:block}
+.sec{padding-block:34px 24px}
+.hero-kicker{display:inline-block;background:var(--accent-soft);color:var(--accent-ink);border-radius:999px;padding:.3rem .8rem;font-size:.82rem;font-weight:700;letter-spacing:.04em}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);margin:14px 0 10px;letter-spacing:-.02em}
+h1 em{color:var(--accent);font-style:normal}
+.sub{font-size:1.12rem;color:var(--ink-2);max-width:70ch}
+.disclaimer{margin-top:18px;background:var(--amber-soft);border:1px solid color-mix(in srgb,var(--amber) 35%,transparent);border-radius:var(--r-m);padding:12px 14px;font-size:.92rem;color:var(--ink-2)}
+.picker{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:18px;box-shadow:var(--shadow-1)}
+.picker h2{font-size:1.1rem;margin-bottom:12px}
+.picker-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.picker-grid a{display:grid;gap:2px;text-decoration:none;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-m);padding:12px 14px;color:var(--ink)}
+.picker-grid a span{font-family:var(--font-mono);font-size:.72rem;color:var(--accent)}
+.picker-grid a b{font-family:var(--font-display)}
+.picker-grid a:hover{border-color:var(--accent);box-shadow:var(--shadow-1)}
+h2.sec-title{font-size:clamp(1.7rem,4.5vw,2.4rem);margin-bottom:8px}
+.lead{color:var(--ink-2);max-width:75ch;margin-bottom:22px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-top:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:16px 18px;box-shadow:var(--shadow-1);display:grid;gap:8px;align-content:start}
+.card h3{font-size:1.1rem}
+.card p,.card li{font-size:.95em;color:var(--ink-2)}
+.card ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);color:var(--accent-ink);border-radius:999px;padding:.2rem .7rem;font-size:.78rem;font-weight:700;text-decoration:none}
+.check{display:grid;gap:8px}
+.check label{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);padding:12px 14px;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--accent);margin-top:2px}
+.check b{font-family:var(--font-display)}
+.check small{display:block;color:var(--muted);font-size:.85em;margin-top:2px}
+.note{background:var(--bg-2);border:1px dashed var(--line);border-radius:var(--r-m);padding:12px 14px;font-size:.92rem;color:var(--ink-2);margin-top:16px}
+.subtabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.subtabs button{cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.45rem 1rem;font-weight:700;color:var(--ink-2)}
+.subtabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.subpanel{display:none}
+.subpanel.on{display:block}
+.table-wrap{overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--surface)}
+table.t{border-collapse:collapse;width:100%;min-width:560px;font-size:.92em}
+.t caption{text-align:left;padding:12px 14px 4px;font-family:var(--font-display);font-weight:700}
+.t th,.t td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.t th{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg-2)}
+.t tr:last-child td{border-bottom:0}
+.lights{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:18px}
+.light{border-radius:var(--r-l);padding:18px;border:2px solid;background:var(--surface);display:grid;gap:8px;align-content:start}
+.light .dot{width:34px;height:34px;border-radius:50%}
+.light h3{font-size:1.2rem}
+.light ul{margin:0;padding-left:18px;font-size:.93em;color:var(--ink-2)}
+.light.g{border-color:var(--green)}.light.g .dot{background:var(--green)}.light.g h3{color:var(--green)}
+.light.a{border-color:var(--amber)}.light.a .dot{background:#f2a51a}.light.a h3{color:var(--amber)}
+.light.r{border-color:var(--red)}.light.r .dot{background:var(--red)}.light.r h3{color:var(--red)}
+.refs{display:grid;gap:8px;counter-reset:f;list-style:none;margin:18px 0 0;padding:0}
+.refs li{counter-increment:f;display:grid;grid-template-columns:38px 1fr;gap:10px;font-size:.9em;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-s);padding:10px 12px}
+.refs li::before{content:counter(f);font-family:var(--font-mono);font-weight:700;color:var(--accent)}
+.refs li:target{border-color:var(--accent);background:var(--accent-soft)}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
+.pager a{display:inline-flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-m);padding:10px 16px;color:var(--ink);max-width:48%}
+.pager a.next{margin-left:auto;text-align:right}
+.pager a small{font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:30px}
+footer .in{max-width:1120px;margin:auto;padding:20px 16px 36px;font-size:.85rem;color:var(--muted)}
+@media print{.topbar,.tabsbar,.tool-btn{display:none}[data-sec]{display:block!important}.subpanel{display:block!important}.sec{break-inside:avoid-page}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true" role="img" aria-label="Logotipo AGEFEC">
+        <defs><linearGradient id="agefec" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fd8f7"/><stop offset="1" stop-color="#1a5c9c"/></linearGradient></defs>
+        <circle cx="32" cy="32" r="29" fill="url(#agefec)"/>
+        <circle cx="32" cy="32" r="29" fill="none" stroke="#0f4478" stroke-width="3"/>
+        <text x="32" y="39" text-anchor="middle" font-family="Bricolage Grotesque, Arial, sans-serif" font-size="17" font-weight="800" fill="#fff">AG</text>
+      </svg>
+      <span>Kit IC · <b>enfermería</b><span class="agefec">AGEFEC</span></span>
+    </a>
+    <span class="topbar-spacer"></span>
+    <button class="tool-btn" id="themeBtn" type="button" aria-pressed="false" title="Cambiar modo claro/oscuro">◐</button>
+    <button class="tool-btn" id="bigText" type="button" aria-pressed="false" title="Texto más grande">A+</button>
+  </div>
+</header>
+<nav class="tabsbar" aria-label="Secciones del kit"><div class="tabs-inner" role="tablist">
+  <a href="#inicio" data-tab="inicio" role="tab"><span class="n">·</span>Inicio</a>
+  <a href="#checklist" data-tab="checklist" role="tab"><span class="n">IC1</span>Checklist</a>
+  <a href="#medicacion" data-tab="medicacion" role="tab"><span class="n">IC2</span>Medicación</a>
+  <a href="#autocuidado" data-tab="autocuidado" role="tab"><span class="n">IC3</span>Autocuidado</a>
+  <a href="#clasificacion" data-tab="clasificacion" role="tab"><span class="n">IC4</span>Clasificación</a>
+  <a href="#descompensacion" data-tab="descompensacion" role="tab"><span class="n">IC5</span>¿Cuándo consultar?</a>
+  <a href="#cruces" data-tab="cruces" role="tab"><span class="n">IC6</span>EPOC y ERC</a>
+  <a href="#fuentes" data-tab="fuentes" role="tab"><span class="n">✓</span>Fuentes</a>
+</div></nav>
+<div class="shell"><main id="main">
+
+<section class="sec hero" id="inicio" data-sec>
+  <span class="hero-kicker">Material para profesionales · IX Congreso AGEFEC · Ourense, 30–31 octubre 2026</span>
+  <h1>Kit <em>IC</em> para la consulta de enfermería</h1>
+  <p class="sub">Herramientas breves para la consulta: qué preguntar, qué enseñar, qué revisar y cuándo consultar en personas con insuficiencia cardiaca.</p>
+  <div class="picker">
+    <h2>Ir directamente a</h2>
+    <div class="picker-grid">
+      <a href="#checklist"><span>IC1</span><b>Checklist de 12 preguntas</b></a>
+      <a href="#medicacion"><span>IC2</span><b>Medicación y seguridad</b></a>
+      <a href="#autocuidado"><span>IC3</span><b>Autocuidado diario</b></a>
+      <a href="#clasificacion"><span>IC4</span><b>Clasificación</b></a>
+      <a href="#descompensacion"><span>IC5</span><b>¿Cuándo consultar?</b></a>
+      <a href="#cruces"><span>IC6</span><b>Cruces con EPOC y ERC</b></a>
+      <a href="#fuentes"><span>✓</span><b>Fuentes</b></a>
+    </div>
+  </div>
+  <p class="disclaimer"><strong>Material docente dirigido a profesionales.</strong> No es un producto sanitario ni sustituye al juicio clínico ni a los protocolos del centro. No incluye dosis, pautas de titulación, calculadoras ni recomendaciones individualizadas. Actualizado en octubre de 2026.</p>
+  <div class="pager"><a class="next" href="#checklist"><small>Siguiente</small><b>Checklist IC</b></a></div>
+</section>
+
+<section class="sec" id="checklist" data-sec>
+  <h2 class="sec-title">Checklist IC: 12 preguntas para mi consulta</h2>
+  <p class="lead">Revisión rápida y estructurada. Las casillas son solo una ayuda visual: <strong>no guardan datos ni crean un registro del paciente</strong>.</p>
+  <div class="check">
+    <label><input type="checkbox"><span><b>1. ¿Sabe que tiene IC y qué significa?</b><small>Explicar en lenguaje sencillo: el corazón no bombea o se llena como debería y por eso aparecen síntomas. <a href="#r1">[1]</a></small></span></label>
+    <label><input type="checkbox"><span><b>2. ¿Se pesa a diario y sabe qué hacer si sube?</b><small>Revisar técnica, registro y plan de actuación acordado. <a href="#r3">[3]</a> <a href="#r4">[4]</a></small></span></label>
+    <label><input type="checkbox"><span><b>3. ¿Reconoce los síntomas de alarma?</b><small>Disnea, ortopnea, despertar por falta de aire, edemas, fatiga y otros signos de congestión. <a href="#r1">[1]</a></small></span></label>
+    <label><input type="checkbox"><span><b>4. ¿Sigue su plan de sal y líquidos?</b><small>El plan es individual; evitar restricciones universales no respaldadas. <a href="#r1">[1]</a> <a href="#r3">[3]</a></small></span></label>
+    <label><input type="checkbox"><span><b>5. ¿Toma la medicación y sabe para qué es cada fármaco?</b><small>Revisar comprensión, adherencia, efectos adversos y conciliación tras cambios. <a href="#r1">[1]</a> <a href="#r5">[5]</a></small></span></label>
+    <label><input type="checkbox"><span><b>6. ¿Tiene al día la analítica de seguimiento?</b><small>Función renal, potasio y demás controles tras cambios de tratamiento; el médico valora resultados. <a href="#r2">[2]</a> <a href="#r5">[5]</a></small></span></label>
+    <label><input type="checkbox"><span><b>7. ¿Evita AINE y otros productos que pueden descompensar?</b><small>Revisar automedicación, corticoides, herbolario y sustitutos de la sal. <a href="#r1">[1]</a> <a href="#r5">[5]</a></small></span></label>
+    <label><input type="checkbox"><span><b>8. ¿Realiza actividad física según su plan?</b><small>Valorar actividad habitual, rehabilitación cardiaca y barreras para realizarla. <a href="#r1">[1]</a> <a href="#r5">[5]</a></small></span></label>
+    <label><input type="checkbox"><span><b>9. ¿Tiene las vacunas al día?</b><small>Revisar calendario vigente, edad, comorbilidades y situación clínica. <a href="#r6">[6]</a></small></span></label>
+    <label><input type="checkbox"><span><b>10. ¿Se ha revisado tabaco, alcohol y peso?</b><small>Ofrecer consejo breve y derivación a recursos de deshabituación si procede. <a href="#r1">[1]</a> <a href="#r2">[2]</a></small></span></label>
+    <label><input type="checkbox"><span><b>11. ¿Cómo está de ánimo, sueño, cuidador y apoyo social?</b><small>Identificar soledad, sobrecarga del cuidador, depresión, deterioro cognitivo o fragilidad. <a href="#r1">[1]</a> <a href="#r5">[5]</a></small></span></label>
+    <label><input type="checkbox"><span><b>12. ¿Tiene plan tras el alta y continuidad asistencial?</b><small>Contacto conocido, citas, medicación, seguimiento por AP/Cardiología/unidad de IC y planificación anticipada si procede. <a href="#r3">[3]</a> <a href="#r4">[4]</a></small></span></label>
+  </div>
+  <p class="note"><strong>Enfermería no diagnostica.</strong> Usar expresiones como «signos compatibles con…», «comprobar que consta el diagnóstico» y «comunicar al médico para que valore». <a href="#r3">[3]</a></p>
+  <div class="pager"><a href="#inicio"><small>Anterior</small><b>Inicio</b></a><a class="next" href="#medicacion"><small>Siguiente</small><b>Medicación</b></a></div>
+</section>
+
+<section class="sec" id="medicacion" data-sec>
+  <h2 class="sec-title">Medicación: qué enseño y qué reviso</h2>
+  <p class="lead">El objetivo es que la persona entienda para qué sirve cada tratamiento, sepa cuándo avisar y no suspenda ni modifique fármacos por su cuenta. La guía ESC 2026 organiza el tratamiento en terapia fundacional y adicional, con diferencias según el fenotipo de IC. <a href="#r1">[1]</a></p>
+  <div class="grid">
+    <article class="card"><span class="pill">Diuréticos de asa</span><h3>Para aliviar la congestión</h3><p><strong>Qué le enseño:</strong> "Este medicamento ayuda a eliminar el exceso de líquido y a reducir hinchazón y falta de aire."</p><ul><li>Revisar peso, edemas, disnea, ortopnea y adherencia.</li><li>Preguntar por mareo, debilidad, calambres, sed o disminución de orina.</li><li>Recordar que la pauta puede cambiar según síntomas y solo la ajusta el equipo prescriptor.</li></ul><p><strong>Cuándo consulto:</strong> deshidratación, mareo importante, empeoramiento de síntomas o dudas sobre la pauta.</p><a class="pill" href="#r1">ESC 2026, apartado 6.1</a></article>
+    <article class="card"><span class="pill">IECA / ARA-II / ARNI</span><h3>Para proteger el corazón</h3><p><strong>Qué le enseño:</strong> "Ayuda a reducir la carga sobre el corazón y a mejorar su funcionamiento a largo plazo."</p><ul><li>Revisar adherencia y efectos adversos referidos: tos, mareo, hipotensión o angioedema previo.</li><li>Recordar la importancia de los controles de función renal y potasio.</li><li>No recomendar inicio, suspensión ni cambios de grupo por cuenta propia.</li></ul><p><strong>Cuándo consulto:</strong> mareo, desmayo, hinchazón de labios o lengua, o síntomas que sugieran intolerancia.</p><a class="pill" href="#r1">ESC 2026, apartado 6.1</a></article>
+    <article class="card"><span class="pill">Betabloqueante</span><h3>Para proteger y regular el corazón</h3><p><strong>Qué le enseño:</strong> "Protege el corazón y ayuda a que trabaje de forma más estable."</p><ul><li>Revisar pulso, mareo, fatiga, frío en extremidades y empeoramiento inicial de la disnea si lo refiere.</li><li>Insistir en no suspenderlo de forma brusca.</li><li>Comprobar que conoce la relación con otras enfermedades y tratamientos.</li></ul><p><strong>Cuándo consulto:</strong> mareo, bradicardia sintomática, fatiga marcada o empeoramiento clínico.</p><a class="pill" href="#r1">ESC 2026, apartado 6.1</a></article>
+    <article class="card"><span class="pill">Antagonista del receptor mineralcorticoide</span><h3>Para reducir retención y daño</h3><p><strong>Qué le enseño:</strong> "Ayuda a reducir la retención de líquidos y protege el corazón."</p><ul><li>Revisar potasio y función renal según el plan de seguimiento.</li><li>Advertir sobre sustitutos de la sal con potasio y suplementos sin indicación.</li><li>Preguntar por debilidad, palpitaciones o mareo.</li></ul><p><strong>Cuándo consulto:</strong> debilidad muscular, palpitaciones, mareo o uso de suplementos de potasio.</p><a class="pill" href="#r1">ESC 2026, apartado 6.1</a></article>
+    <article class="card"><span class="pill">iSGLT2</span><h3>Para IC, también con ERC</h3><p><strong>Qué le enseño:</strong> "Este fármaco ayuda al corazón y puede beneficiar también al riñón."</p><ul><li>Revisar hidratación según su plan, síntomas genitourinarios y riesgo de descompensación.</li><li>Recordar que puede modificar la glucemia en personas con diabetes.</li><li>Coordinar cualquier duda con el equipo prescriptor.</li></ul><p><strong>Cuándo consulto:</strong> síntomas de infección genitourinaria, deshidratación, vómitos o reducción importante de ingesta.</p><a class="pill" href="#r1">ESC 2026, apartados 6.1.2 y 10.3</a></article>
+    <article class="card"><span class="pill">Fármacos de riesgo</span><h3>AINE, herbolario y automedicación</h3><p><strong>Qué le enseño:</strong> "Antes de tomar algo nuevo, incluso un producto natural, pregúntame o consulta con farmacia."</p><ul><li>Revisar AINE, corticoides, laxantes, suplementos, sustitutos de sal y productos de herbolario.</li><li>Explicar que algunos fármacos pueden favorecer retención de líquidos, afectar al riñón o interactuar con el tratamiento.</li><li>Derivar la valoración de la medicación al médico o farmacia según el circuito local.</li></ul><p><strong>Cuándo consulto:</strong> cualquier medicamento nuevo, síntomas nuevos o duda sobre interacciones.</p><a class="pill" href="#r1">ESC 2026</a> <a class="pill" href="#r5">Manual AEEC</a></article>
+    <article class="card"><span class="pill">Días de enfermedad</span><h3>Qué hacer si está enfermo</h3><p><strong>Qué le enseño:</strong> "Si tienes fiebre, vómitos, diarrea o no puedes comer o beber, avísanos; no cambies la medicación por tu cuenta."</p><ul><li>Identificar deshidratación, reducción de ingesta, infección o empeoramiento respiratorio.</li><li>Revisar peso, síntomas, medicación y necesidad de contacto precoz.</li><li>El ajuste del tratamiento corresponde al equipo prescriptor.</li></ul><p><strong>Cuándo consulto:</strong> ante cualquier enfermedad intercurrente con síntomas de IC o riesgo de deshidratación.</p><a class="pill" href="#r3">PAI IC A Coruña</a></article>
+  </div>
+  <p class="note"><strong>Sin dosis ni titulación.</strong> Este Kit no incluye dosis, pautas ni criterios de ajuste. Consultar la ficha técnica vigente en CIMA-AEMPS, el protocolo del centro y al equipo prescriptor. <a href="#r7">[7]</a></p>
+  <div class="pager"><a href="#checklist"><small>Anterior</small><b>Checklist</b></a><a class="next" href="#autocuidado"><small>Siguiente</small><b>Autocuidado</b></a></div>
+</section>
+
+<section class="sec" id="autocuidado" data-sec>
+  <h2 class="sec-title">Autocuidado diario</h2>
+  <p class="lead">El autocuidado es el eje de la consulta: reconocer cambios, seguir el plan individual y saber a quién contactar. La guía ESC 2026 incluye el manejo multidisciplinar, el seguimiento a largo plazo y las comorbilidades como partes centrales del cuidado. <a href="#r1">[1]</a></p>
+  <div class="subtabs" role="tablist" aria-label="Temas de autocuidado">
+    <button role="tab" aria-selected="true" data-sub="peso">Peso y síntomas</button>
+    <button role="tab" aria-selected="false" data-sub="sal">Sal y líquidos</button>
+    <button role="tab" aria-selected="false" data-sub="actividad">Actividad y descanso</button>
+    <button role="tab" aria-selected="false" data-sub="habitos">Hábitos y bienestar</button>
+  </div>
+
+  <div class="subpanel on" id="sub-peso">
+    <div class="grid">
+      <article class="card"><h3>Cómo pesarse</h3><ul><li>"Pésate cada día, a la misma hora, después de orinar y antes del desayuno."</li><li>Usar la misma báscula, con ropa similar.</li><li>Anotar el peso y los síntomas del día.</li><li>Revisar que sabe qué hacer si el peso aumenta.</li></ul><a class="pill" href="#r4">Planificación al alta IC</a></article>
+      <article class="card"><h3>Qué registrar</h3><ul><li>Peso diario.</li><li>Disnea, ortopnea, número de almohadas.</li><li>Edemas en tobillos, piernas o abdomen.</li><li>Fatiga, palpitaciones, mareo y tolerancia al esfuerzo.</li></ul><p>Estos datos ayudan a detectar cambios, pero su interpretación corresponde al equipo clínico. <a href="#r1">[1]</a></p><a class="pill" href="#r1">ESC 2026, tabla 7</a></article>
+      <article class="card"><h3>Mensaje al paciente</h3><p>"Si notas que te falta más el aire, te hinchas, necesitas más almohadas o subes de peso según lo acordado, avísanos antes de que empeore."</p><p>El documento local de planificación al alta recoge como datos de alarma ganancia de peso de 2 kg en 2–3 días, aumento de disnea, edemas, aumento del número de almohadas y nivel bajo de cuidado. <a href="#r4">[4]</a></p><a class="pill" href="#r4">Criterio local</a></article>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-sal">
+    <div class="grid">
+      <article class="card"><h3>Sal</h3><ul><li>Seguir el plan individual de sal acordado con el equipo.</li><li>Revisar alimentos procesados, conservas, embutidos, sopas preparadas y comida fuera de casa.</li><li>Evitar sustitutos de la sal con potasio sin consultar.</li></ul><p>La guía ESC 2026 aborda los factores relacionados con el estilo de vida y la prevención; la restricción concreta debe individualizarse. <a href="#r1">[1]</a></p><a class="pill" href="#r1">ESC 2026</a></article>
+      <article class="card"><h3>Líquidos</h3><ul><li>El plan de líquidos es individual y puede cambiar según IC, ERC, síntomas y situación clínica.</li><li>No imponer restricciones universales no respaldadas por la fuente.</li><li>En días de enfermedad, vómitos, diarrea o calor, revisar el plan con el equipo.</li></ul><a class="pill" href="#r1">ESC 2026</a> <a class="pill" href="#r3">PAI IC</a></article>
+      <article class="card"><h3>Atención en ERC</h3><p>En personas con IC y ERC, las indicaciones sobre líquidos, potasio y sodio pueden ser distintas. Ante mensajes contradictorios, priorizar la valoración conjunta con nefrología, cardiología, medicina de familia y enfermería. <a href="#r1">[1]</a> <a href="#r2">[2]</a></p><a class="pill" href="#r2">PAI IC A Coruña</a></article>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-actividad">
+    <div class="grid">
+      <article class="card"><h3>Actividad física</h3><ul><li>Fomentar actividad regular adaptada a la capacidad y al plan clínico.</li><li>"Muévete todos los días lo que puedas, sin llegar al agotamiento."</li><li>Identificar miedo a la actividad, fatiga, disnea o falta de apoyo.</li></ul><p>La guía ESC 2026 incluye dieta y actividad física dentro de la prevención y el manejo de la IC. <a href="#r1">[1]</a></p><a class="pill" href="#r1">ESC 2026</a></article>
+      <article class="card"><h3>Rehabilitación cardiaca</h3><ul><li>Comprobar si consta derivación, participación o lista de espera.</li><li>Explicar que puede mejorar capacidad, síntomas y calidad de vida.</li><li>Derivar o informar según el circuito del centro.</li></ul><a class="pill" href="#r1">ESC 2026</a> <a class="pill" href="#r5">Manual AEEC</a></article>
+      <article class="card"><h3>Descanso y síntomas</h3><ul><li>El descanso no sustituye a la actividad adaptada.</li><li>Si aparece disnea, dolor torácico, mareo o palpitaciones durante el esfuerzo, interrumpir y consultar.</li><li>El médico valorará la necesidad de ajustar el plan.</li></ul><a class="pill" href="#r1">ESC 2026, tabla 7</a></article>
+    </div>
+  </div>
+
+  <div class="subpanel" id="sub-habitos">
+    <div class="grid">
+      <article class="card"><h3>Tabaco y alcohol</h3><ul><li>Preguntar por consumo actual y ofrecer consejo breve.</li><li>Derivar a deshabituación tabáquica si la persona está interesada.</li><li>Revisar consumo de alcohol y otras sustancias.</li></ul><a class="pill" href="#r1">ESC 2026, apartado 4.1.3</a></article>
+      <article class="card"><h3>Ánimo, sueño y apoyo</h3><ul><li>Explorar tristeza, ansiedad, insomnio, aislamiento y sobrecarga del cuidador.</li><li>La guía ESC 2026 incluye ansiedad, depresión, deterioro cognitivo y fragilidad entre las comorbilidades relevantes. <a href="#r1">[1]</a></li><li>Activar trabajo social o recursos comunitarios si hay necesidad.</li></ul><a class="pill" href="#r1">ESC 2026, apartado 10</a></article>
+      <article class="card"><h3>Vacunas</h3><ul><li>Revisar calendario vacunal vigente de Galicia/España.</li><li>Considerar edad, comorbilidades, situación clínica y recomendaciones vigentes.</li><li>Registrar la vacunación y actualizar el calendario.</li></ul><a class="pill" href="#r6">Calendario vacunal</a></article>
+    </div>
+  </div>
+  <div class="pager"><a href="#medicacion"><small>Anterior</small><b>Medicación</b></a><a class="next" href="#clasificacion"><small>Siguiente</small><b>Clasificación</b></a></div>
+</section>
+
+<section class="sec" id="clasificacion" data-sec>
+  <h2 class="sec-title">Clasificación de la IC</h2>
+  <p class="lead">Estas tablas son de referencia para explicar la situación de la persona. Enfermería puede identificar la clase funcional que refiere el paciente; el diagnóstico, el fenotipo y la FEVI los establece el equipo médico.</p>
+  <div class="table-wrap"><table class="t">
+    <caption>Clase funcional NYHA — ESC 2026, tabla 8 <a href="#r1">[1]</a></caption>
+    <thead><tr><th>Clase</th><th>Limitación y actividad física</th></tr></thead>
+    <tbody>
+      <tr><td><b>I</b></td><td>Sin limitación de la actividad física. La actividad habitual no causa disnea, fatiga ni palpitaciones excesivas.</td></tr>
+      <tr><td><b>II</b></td><td>Leve limitación. Cómodo en reposo, pero la actividad habitual produce disnea, fatiga o palpitaciones.</td></tr>
+      <tr><td><b>III</b></td><td>Marcada limitación. Cómodo en reposo, pero una actividad menor que la habitual produce síntomas.</td></tr>
+      <tr><td><b>IV</b></td><td>Síntomas con cualquier actividad física y, en ocasiones, en reposo.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table class="t">
+    <caption>Estadios A–D — clasificación adoptada por la guía ESC 2026 <a href="#r1">[1]</a></caption>
+    <thead><tr><th>Estadio</th><th>Situación</th></tr></thead>
+    <tbody>
+      <tr><td><b>A</b></td><td>Riesgo de IC, sin cardiopatía estructural ni síntomas.</td></tr>
+      <tr><td><b>B</b></td><td>Cardiopatía estructural o alteración de la función ventricular, sin síntomas actuales o previos de IC.</td></tr>
+      <tr><td><b>C</b></td><td>IC con síntomas actuales o previos.</td></tr>
+      <tr><td><b>D</b></td><td>IC avanzada o refractaria, con síntomas marcados que requieren intervenciones especializadas.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap"><table class="t">
+    <caption>Clasificación por fracción de eyección — cambios de la guía ESC 2026 <a href="#r1">[1]</a></caption>
+    <thead><tr><th>Categoría</th><th>Definición según ESC 2026</th></tr></thead>
+    <tbody>
+      <tr><td><b>IC-FEr</b></td><td>Fracción de eyección reducida; la guía 2026 amplía esta categoría hasta una FEVI de hasta el 50%.</td></tr>
+      <tr><td><b>IC-FEp</b></td><td>Fracción de eyección preservada; incluye una FEVI del 50% o superior.</td></tr>
+      <tr><td><b>IC-FEmr</b></td><td>La categoría de IC con fracción de eyección ligeramente reducida o en rango medio <strong>ha sido eliminada</strong> en la guía ESC 2026.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><strong>Las fuentes no coinciden.</strong> El PAI y materiales previos emplean la clasificación clásica IC-FEr / IC-FEm / IC-FEp. La guía ESC 2026 elimina la categoría IC-FEmr y amplía la IC-FEr hasta FEVI ≤50%. En la práctica, usar la guía ESC 2026 como referencia actual y comprobar qué terminología figura en el informe clínico del paciente. <a href="#r1">[1]</a> <a href="#r2">[2]</a> <a href="#r5">[5]</a></div>
+  <div class="pager"><a href="#autocuidado"><small>Anterior</small><b>Autocuidado</b></a><a class="next" href="#descompensacion"><small>Siguiente</small><b>¿Cuándo consultar?</b></a></div>
+</section>
+
+<section class="sec" id="descompensacion" data-sec>
+  <h2 class="sec-title">Descompensación: ¿cuándo consultar?</h2>
+  <p class="lead">Enseñar a reconocer cambios precozmente y a contactar según el plan. La guía ESC 2026 utiliza el término <strong>IC descompensada</strong> en lugar de IC aguda. <a href="#r1">[1]</a></p>
+  <div class="lights">
+    <div class="light g"><span class="dot"></span><h3>Verde: control estable</h3><ul><li>Peso y síntomas estables.</li><li>Medicación tomada según pauta.</li><li>Sigue el plan de sal, líquidos y actividad.</li><li>Tiene citas y contacto de referencia.</li></ul></div>
+    <div class="light a"><span class="dot"></span><h3>Ámbar: avisar al equipo</h3><ul><li>Aumento de disnea, ortopnea o número de almohadas.</li><li>Aumento de edemas o de peso según el criterio acordado.</li><li>Mayor fatiga, tos nocturna o menor tolerancia al esfuerzo.</li><li>Dificultad para tomar medicación, fiebre, vómitos o diarrea.</li></ul><p>Contactar con el centro de referencia, enfermería o médico según el circuito local. <a href="#r3">[3]</a> <a href="#r4">[4]</a></p></div>
+    <div class="light r"><span class="dot"></span><h3>Rojo: urgencia</h3><ul><li>Disnea intensa, en reposo o de inicio brusco.</li><li>Dolor torácico, síncope, confusión o malestar intenso.</li><li>Signos de hipoperfusión o empeoramiento rápido.</li><li>Situación que el paciente, cuidador o profesional considere urgente.</li></ul><p>Acudir a urgencias o llamar al 112 según la gravedad. El PAI recoge criterios específicos de derivación a urgencias. <a href="#r3">[3]</a></p></div>
+  </div>
+  <div class="grid">
+    <article class="card"><h3>Qué enseño al paciente y al cuidador</h3><ul><li>"Pesarse a diario y anotar los cambios."</li><li>"Si empeora la respiración o aumentan los edemas, avísanos pronto."</li><li>"No suspendas ni cambies la medicación por tu cuenta."</li><li>"Ten a mano el informe de alta, la medicación y el teléfono de contacto."</li></ul><a class="pill" href="#r3">PAI IC A Coruña</a></article>
+    <article class="card"><h3>Transición tras el alta</h3><ul><li>Comprobar que dispone del informe de alta y de la medicación.</li><li>Revisar adherencia, efectos adversos, citas y analítica pendiente.</li><li>Valorar peso, TA, FC, síntomas de alarma y capacidad de cuidado.</li><li>Confirmar que sabe con quién comunicarse.</li></ul><p>El documento local de planificación al alta contempla registro diario de peso, TELEA, comprobación de tratamiento y citas, y datos de alarma. <a href="#r4">[4]</a></p><a class="pill" href="#r4">Planificación al alta</a></article>
+  </div>
+  <div class="pager"><a href="#clasificacion"><small>Anterior</small><b>Clasificación</b></a><a class="next" href="#cruces"><small>Siguiente</small><b>EPOC y ERC</b></a></div>
+</section>
+
+<section class="sec" id="cruces" data-sec>
+  <h2 class="sec-title">Cruces con EPOC y ERC</h2>
+  <p class="lead">Puntos comunes de la mesa «Los grandes olvidados de la enfermedad crónica». La guía ESC 2026 incluye enfermedad renal crónica, enfermedad pulmonar y trastornos del sueño entre las comorbilidades relevantes. <a href="#r1">[1]</a></p>
+  <div class="grid">
+    <article class="card"><span class="pill">Cardiorrenal</span><h3>IC y ERC</h3><ul><li>Vigilar función renal, potasio y volumen según plan.</li><li>IECA/ARA-II/ARNI, antagonistas mineralcorticoideos, diuréticos e iSGLT2 requieren coordinación.</li><li>Los mensajes sobre líquidos y sal pueden diferir entre IC y ERC.</li></ul><a class="pill" href="#r1">ESC 2026, apartado 10.3</a></article>
+    <article class="card"><span class="pill">Respiratorio</span><h3>IC y EPOC</h3><ul><li>La disnea puede tener origen cardiaco, respiratorio o mixto; no diagnosticar, sino valorar cambios y comunicar.</li><li>Las exacerbaciones respiratorias, infecciones y desaturación pueden favorecer la descompensación.</li><li>El cese del tabaquismo es prioritario en ambas enfermedades.</li></ul><a class="pill" href="#r1">ESC 2026, apartado 10.6</a></article>
+    <article class="card"><span class="pill">Seguridad</span><h3>Polimedicación</h3><ul><li>Revisar AINE, corticoides, broncodilatadores, suplementos y productos de herbolario.</li><li>Comprobar adherencia, duplicidades y efectos adversos.</li><li>Coordinar con médico de familia, cardiología, neumología, nefrología y farmacia.</li></ul><a class="pill" href="#r5">Manual AEEC</a></article>
+  </div>
+  <div class="pager"><a href="#descompensacion"><small>Anterior</small><b>¿Cuándo consultar?</b></a><a class="next" href="#fuentes"><small>Siguiente</small><b>Fuentes</b></a></div>
+</section>
+
+<section class="sec" id="fuentes" data-sec>
+  <h2 class="sec-title">Fuentes</h2>
+  <p class="lead">Bibliografía en formato Vancouver. Fecha de consulta de las fuentes web: 15 de octubre de 2026.</p>
+  <ol class="refs">
+    <li id="r1"><span>European Society of Cardiology. ESC Guidelines for the management of heart failure. 2026. Documento adjunto al proyecto; se han utilizado especialmente las tablas 4, 7 y 8, el apartado 6.1 sobre tratamiento farmacológico, el apartado 7 sobre IC descompensada, el apartado 10 sobre comorbilidades y el apartado 11 sobre equipo multidisciplinar y seguimiento.</span></li>
+    <li id="r2"><span>Servizo Galego de Saúde. Proceso Asistencial Integrado. Insuficiencia Cardíaca. Área Sanitaria de A Coruña e Cee. Documento de área; comprobar vigencia y circuito local antes de su aplicación.</span></li>
+    <li id="r3"><span>Servizo Galego de Saúde. PAI Insuficiencia Cardíaca, Área Sanitaria de A Coruña e Cee: educación para la salud, seguimiento en atención primaria, descompensaciones, criterios de derivación a urgencias y coordinación entre niveles asistenciales.</span></li>
+    <li id="r4"><span>Servizo Galego de Saúde. Planificación al alta paciente con IC. V1, 20-01-2025. Área Sanitaria de A Coruña e Cee: peso y constantes diarios, TELEA, adherencia, datos de alarma, comprobación de citas y contacto.</span></li>
+    <li id="r5"><span>Asociación Española de Enfermería en Cardiología. Manual de procedimientos en insuficiencia cardíaca por enfermeras especializadas. 2021; actualizado abril 2022.</span></li>
+    <li id="r6"><span>Servizo Galego de Saúde / Ministerio de Sanidad. Calendario vacunal vigente de Galicia y España. Consultar la versión vigente antes de la vacunación.</span></li>
+    <li id="r7"><span>Agencia Española de Medicamentos y Productos Sanitarios. CIMA: Centro de Información online de Medicamentos. Disponible en: https://cima.aemps.es</span></li>
+    <li id="r8"><span>Sociedad Española de Cardiología. Documentos de consenso y materiales de insuficiencia cardiaca. Consultar la versión vigente correspondiente.</span></li>
+    <li id="r9"><span>Sociedad Española de Medicina de Familia y Comunidad. Posicionamiento SEMERGEN en el abordaje de la insuficiencia cardiaca crónica en atención primaria. 2022.</span></li>
+  </ol>
+  <div class="note"><strong>Huecos señalados:</strong> este Kit no incluye cifras, dosis, puntos de corte ni criterios de derivación que no estén presentes en las fuentes utilizadas. Cuando la guía ESC 2026 y el PAI difieran —especialmente en clasificación por FEVI y terminología de IC aguda/descompensada—, prevalece la guía ESC 2026 como referencia actualizada y se recomienda comprobar el protocolo local.</div>
+</section>
+
+</main></div>
+<footer><div class="in">
+  <p><strong>Kit IC para la consulta de enfermería</strong> · Autor: Marcos Esmoris · v1.0 · 2026 · Licencia CC BY-NC-ND 4.0.</p>
+  <p><strong>Cómo citar:</strong> Esmoris M. Kit IC para la consulta de enfermería. 2026. v1.0. [DOI].</p>
+  <p>Material docente dirigido a profesionales. No es un producto sanitario ni sustituye al juicio clínico ni a los protocolos del centro. Contenido seleccionado, revisado y validado por el autor, con apoyo de IA. Sin conflicto de intereses. Trabajo no financiado.</p>
+</div></footer>
+<script>
+(function(){
+  var d=document.documentElement;
+  function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function read(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  var savedTheme=read('kitic-theme');
+  if(savedTheme){d.setAttribute('data-theme',savedTheme);var tb=document.getElementById('themeBtn');if(tb)tb.setAttribute('aria-pressed',savedTheme==='dark'?'true':'false');}
+  var themeBtn=document.getElementById('themeBtn');
+  if(themeBtn)themeBtn.addEventListener('click',function(){
+    var cur=d.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark';d.setAttribute('data-theme',next);themeBtn.setAttribute('aria-pressed',next==='dark'?'true':'false');store('kitic-theme',next);
+  });
+  var big=document.getElementById('bigText');
+  if(read('kitic-big')==='1'){d.classList.add('big-text');if(big)big.setAttribute('aria-pressed','true');}
+  if(big)big.addEventListener('click',function(){
+    var on=d.classList.toggle('big-text');big.setAttribute('aria-pressed',on?'true':'false');store('kitic-big',on?'1':'0');
+  });
+  var tabs=[].slice.call(document.querySelectorAll('[data-tab]'));
+  var secs=[].slice.call(document.querySelectorAll('[data-sec]'));
+  function show(id){
+    if(!document.getElementById(id))id='inicio';
+    secs.forEach(function(s){s.classList.toggle('on',s.id===id)});
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.getAttribute('data-tab')===id?'true':'false')});
+    store('kitic-tab',id);window.scrollTo({top:0,behavior:'smooth'});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();show(t.getAttribute('data-tab'));history.replaceState(null,'','#'+t.getAttribute('data-tab'));})});
+  var inicioBtns=[].slice.call(document.querySelectorAll('#inicio .picker-grid a, #inicio .pager a'));
+  inicioBtns.forEach(function(a){a.addEventListener('click',function(e){
+    var id=(a.getAttribute('href')||'').replace('#','');
+    if(id&&document.getElementById(id)){e.preventDefault();show(id);history.replaceState(null,'','#'+id);}
+  })});
+  var initial=location.hash.replace('#','')||read('kitic-tab')||'inicio';
+  show(initial);
+  var subs=[].slice.call(document.querySelectorAll('.subtabs button'));
+  var panels=[].slice.call(document.querySelectorAll('.subpanel'));
+  subs.forEach(function(b){b.addEventListener('click',function(){
+    var id=b.getAttribute('data-sub');
+    subs.forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false')});
+    panels.forEach(function(p){p.classList.toggle('on',p.id==='sub-'+id)});
+  })});
+})();
+</script>
+</body>
+</html>
